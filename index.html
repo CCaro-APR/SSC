@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>College Office Hub — A. Philip Randolph Campus High School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; background:#f8fafc; -webkit-font-smoothing:antialiased; }
+  * { box-sizing:border-box; }
+  a { color:#0284c7; text-decoration:none; }
+  input::placeholder { color:#94a3b8; }
+
+  @keyframes blobA {
+    0%,100% { transform:translate(0,0) rotate(0deg) scale(1); }
+    33%      { transform:translate(60px,-40px) rotate(120deg) scale(1.12); }
+    66%      { transform:translate(-40px,50px) rotate(240deg) scale(.94); }
+  }
+  @keyframes blobB {
+    0%,100% { transform:translate(0,0) rotate(0deg) scale(1); }
+    50%     { transform:translate(-70px,60px) rotate(180deg) scale(1.15); }
+  }
+  @keyframes blobC {
+    0%,100% { transform:translate(0,0) rotate(0deg); }
+    50%     { transform:translate(50px,70px) rotate(-140deg); }
+  }
+  @keyframes dotPulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%     { opacity:.35; transform:scale(.75); }
+  }
+  @keyframes stickerWiggle {
+    0%,100% { transform:rotate(-3deg); }
+    50%     { transform:rotate(2.5deg); }
+  }
+
+  .card-lift { transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease; }
+  .card-lift:hover  { transform:translateY(-6px) scale(1.02); }
+  .card-lift:active { transform:scale(.95); }
+
+  .card-sky:hover    { box-shadow:0 26px 44px -26px rgba(2,132,199,.9); }
+  .card-teal:hover   { box-shadow:0 26px 44px -26px rgba(13,148,136,.85); }
+  .card-green:hover  { box-shadow:0 26px 44px -26px rgba(5,150,105,.85); }
+  .card-amber:hover  { box-shadow:0 26px 44px -26px rgba(217,119,6,.8); }
+  .card-violet:hover { box-shadow:0 26px 44px -26px rgba(124,58,237,.8); }
+  .card-pink:hover   { box-shadow:0 26px 44px -26px rgba(219,39,119,.8); }
+  .card-orange:hover { box-shadow:0 26px 44px -26px rgba(234,88,12,.8); }
+  .card-indigo:hover { box-shadow:0 26px 44px -26px rgba(79,70,229,.8); }
+  .card-blue:hover   { box-shadow:0 26px 44px -26px rgba(37,99,235,.8); }
+
+  .btn-lift { transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease; }
+  .btn-lift:hover  { transform:translateY(-6px) scale(1.02); }
+  .btn-lift:active { transform:scale(.95); }
+
+  .btn-lift-sm { transition:transform .3s cubic-bezier(.34,1.56,.64,1), background .3s ease; }
+  .btn-lift-sm:hover  { transform:translateY(-3px); }
+  .btn-lift-sm:active { transform:scale(.95); }
+  .btn-indigo { background:#4f46e5; } .btn-indigo:hover { background:#4338ca; }
+  .btn-blue   { background:#2563eb; } .btn-blue:hover   { background:#1d4ed8; }
+
+  .btn-dark { transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease; }
+  .btn-dark:hover  { transform:translateY(-6px) scale(1.02); box-shadow:0 28px 46px -18px rgba(15,23,42,.95); }
+  .btn-dark:active { transform:scale(.95); }
+
+  .slide-btn { transition:background .25s ease; }
+  .slide-btn:hover { background:rgba(255,255,255,.42) !important; }
+
+  .dot-btn { transition:width .35s ease, background .35s ease; }
+  .sticker  { animation:stickerWiggle 5s ease-in-out infinite; }
+  .search-wrap:focus-within { box-shadow:0 18px 40px -26px rgba(15,23,42,.7) !important; }
+
+  /* Placeholder cards — grayed out, not clickable */
+  .is-placeholder {
+    opacity: .5;
+    cursor: default !important;
+    pointer-events: none;
+    filter: grayscale(.35);
+  }
+  .placeholder-badge {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1.5px dashed #cbd5e1;
+    white-space: nowrap;
+    animation: none !important;
+    transform: none !important;
+  }
+</style>
+</head>
+<body>
+
+<div style="position:relative;min-height:100vh;background:#f8fafc;font-family:'DM Sans',system-ui,sans-serif;color:#0f172a;overflow-x:hidden;">
+
+  <!-- Animated blob background -->
+  <div style="position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;">
+    <div style="position:absolute;top:-180px;left:-140px;width:620px;height:620px;border-radius:48% 52% 61% 39% / 43% 45% 55% 57%;background:radial-gradient(circle at 35% 35%,rgba(251,207,232,.85) 0%,rgba(251,207,232,0) 68%);filter:blur(18px);animation:blobA 26s ease-in-out infinite;"></div>
+    <div style="position:absolute;top:120px;right:-200px;width:660px;height:660px;border-radius:56% 44% 39% 61% / 52% 38% 62% 48%;background:radial-gradient(circle at 55% 45%,rgba(254,240,138,.9) 0%,rgba(254,240,138,0) 66%);filter:blur(20px);animation:blobB 32s ease-in-out infinite;"></div>
+    <div style="position:absolute;bottom:-260px;left:26%;width:720px;height:720px;border-radius:42% 58% 55% 45% / 60% 45% 55% 40%;background:radial-gradient(circle at 50% 50%,rgba(186,230,253,.9) 0%,rgba(186,230,253,0) 66%);filter:blur(22px);animation:blobC 38s ease-in-out infinite;"></div>
+  </div>
+
+  <div style="position:relative;z-index:1;">
+
+  <!-- HERO -->
+  <header style="max-width:1240px;margin:0 auto;padding:52px 32px 18px;">
+    <div style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;">
+      <img src="logo.png" alt="A. Philip Randolph Campus High School" style="width:96px;height:96px;object-fit:contain;border-radius:26px;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);padding:9px;border:1px solid rgba(255,255,255,.9);box-shadow:0 18px 40px -20px rgba(15,23,42,.4);flex:none;">
+      <div style="flex:1 1 320px;min-width:280px;">
+        <div style="display:flex;align-items:center;gap:9px;padding:7px 15px 7px 12px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid rgba(190,242,100,.9);width:max-content;box-shadow:0 10px 24px -14px rgba(101,163,13,.7);">
+          <span style="width:8px;height:8px;border-radius:999px;background:#65a30d;animation:dotPulse 1.9s ease-in-out infinite;display:inline-block;flex:none;"></span>
+          <span style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:#3f6212;white-space:nowrap;">Updated today</span>
+        </div>
+        <h1 style="font-family:'Outfit',sans-serif;font-size:76px;line-height:.94;letter-spacing:-.045em;font-weight:900;margin:18px 0 0;color:#0f172a;text-wrap:balance;">
+          Your college<br>plan, <span style="position:relative;display:inline-block;padding:0 6px;"><span style="position:absolute;left:0;right:0;bottom:6px;height:26px;background:linear-gradient(96deg,#fde047 0%,#fbcfe8 100%);border-radius:6px;transform:rotate(-1.2deg);z-index:-1;"></span>sorted.</span>
+        </h1>
+      </div>
+      <div style="flex:1 1 300px;min-width:280px;display:flex;flex-direction:column;gap:14px;">
+        <p style="margin:0;font-size:18px;line-height:1.55;color:#475569;text-wrap:pretty;">Every application portal, aid form, scholarship and handout your counselors actually use — plus your youth leaders and our monthly newsletters. One page, always current.</p>
+        <div class="search-wrap" style="display:flex;align-items:center;gap:11px;padding:16px 19px;border-radius:20px;background:rgba(255,255,255,.78);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.95);box-shadow:0 18px 40px -26px rgba(15,23,42,.55);transition:box-shadow .2s ease;">
+          <span style="font-size:17px;">🔍</span>
+          <input id="search" type="text" placeholder="Search FAFSA, CUNY, a youth leader…" style="flex:1;min-width:0;background:transparent;border:0;outline:none;color:#0f172a;font-family:'DM Sans',sans-serif;font-size:15.5px;">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CAROUSEL -->
+  <section style="max-width:1240px;margin:0 auto;padding:22px 32px 0;">
+    <div id="carousel-wrap" style="position:relative;border-radius:34px;overflow:hidden;border:1.5px solid rgba(255,255,255,.95);box-shadow:0 40px 80px -50px rgba(15,23,42,.9);background:#e2e8f0;">
+      <div id="slides-container" style="position:relative;height:clamp(320px,32vw,420px);"></div>
+      <div id="dots-container" style="position:absolute;bottom:20px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:9px;z-index:20;"></div>
+    </div>
+  </section>
+
+  <!-- BENTO GRID -->
+  <main id="bento" style="max-width:1240px;margin:0 auto;padding:30px 32px 40px;display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start;"></main>
+
+  <!-- FOOTER -->
+  <footer style="max-width:1240px;margin:0 auto;padding:0 32px 70px;">
+    <div style="border-radius:34px;padding:38px 34px;background:linear-gradient(125deg,rgba(224,242,254,.85) 0%,rgba(254,249,195,.8) 52%,rgba(252,231,243,.85) 100%);backdrop-filter:blur(14px);border:1.5px solid rgba(255,255,255,.95);display:flex;gap:30px;flex-wrap:wrap;align-items:center;justify-content:space-between;box-shadow:0 34px 70px -50px rgba(15,23,42,.8);">
+      <div style="min-width:260px;">
+        <h3 style="margin:0;font-family:'Outfit',sans-serif;font-size:31px;font-weight:900;letter-spacing:-.03em;color:#0f172a;">Stuck? Come find us. 👋</h3>
+        <p style="margin:9px 0 0;font-size:16px;line-height:1.55;color:#334155;">College Office · Room 214 · Open 8:30 AM – 3:30 PM<br>Walk-in hours every Wednesday after 6th period.</p>
+      </div>
+      <a href="mailto:cgoris@aprandolph.com" class="btn-dark" style="display:flex;align-items:center;gap:11px;padding:18px 30px;border-radius:999px;background:#0f172a;color:#ffffff;font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.01em;box-shadow:0 22px 40px -18px rgba(15,23,42,.9);">
+        <span style="font-size:18px;">✉️</span>Email a counselor
+      </a>
+    </div>
+  </footer>
+
+  </div>
+</div>
+
+<!-- Edit data.js — not this file -->
+<script src="data.js"></script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   RENDERING ENGINE — no need to edit below this line
+   ═══════════════════════════════════════════════════════════ */
+
+const SLIDE_THEMES = {
+  sky:    "linear-gradient(115deg,#bae6fd 0%,#e0f2fe 55%,#f0f9ff 100%)",
+  pink:   "linear-gradient(115deg,#fbcfe8 0%,#fce7f3 55%,#fdf2f8 100%)",
+  amber:  "linear-gradient(115deg,#fde68a 0%,#fef3c7 55%,#fffbeb 100%)",
+  mint:   "linear-gradient(115deg,#a7f3d0 0%,#d1fae5 55%,#f0fdf4 100%)",
+  violet: "linear-gradient(115deg,#ddd6fe 0%,#ede9fe 55%,#f5f3ff 100%)"
+};
+
+const h = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const ini = name => name.split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('');
+const BG  = (a,b,c) => `linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)) padding-box,linear-gradient(135deg,${a} 0%,${b} 55%,${c} 100%) border-box`;
+const ph  = item => !!item.placeholder;
+const phHref  = item => ph(item) ? 'javascript:void(0)' : h(item.url);
+const phClass = (item, color) => ph(item) ? 'is-placeholder' : `card-lift ${color}`;
+const phBadge = () => `<span class="placeholder-badge">Coming Soon</span>`;
+const sticker = (tag, bg, shadow) =>
+  `<span class="sticker" style="display:inline-block;white-space:nowrap;font-family:'Outfit',sans-serif;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:5px 11px;border-radius:9px;background:${bg};color:#fff;white-space:nowrap;box-shadow:0 8px 16px -8px ${shadow};transform:rotate(-3deg);">${h(tag)}</span>`;
+
+/* ── Slideshow ── */
+let SS = { cur: 0, paused: false };
+
+function goTo(i) {
+  SS.cur = ((i % SLIDESHOW.length) + SLIDESHOW.length) % SLIDESHOW.length;
+  renderSlides();
+}
+function startTimer() {
+  setInterval(() => { if (!SS.paused && SLIDESHOW.length > 1) goTo(SS.cur + 1); }, 7000);
+}
+
+function renderSlides() {
+  const active = SS.cur;
+  const cont   = document.getElementById('slides-container');
+  const dots   = document.getElementById('dots-container');
+
+  cont.innerHTML = SLIDESHOW.map((s, i) => {
+    const noImg = !s.image;
+    const ctaOk = !ph(s);
+    return `<div style="position:absolute;inset:0;opacity:${i===active?1:0};z-index:${i===active?10:1};transition:opacity .8s ease;">
+      <div style="position:absolute;inset:0;background:${SLIDE_THEMES[s.theme]||SLIDE_THEMES.sky};"></div>
+      <div style="position:absolute;inset:0;background-image:${s.image?`url("${h(s.image)}")`:'none'};background-size:cover;background-position:center;"></div>
+      ${noImg?`<div style="position:absolute;top:0;right:0;bottom:0;width:46%;display:grid;place-items:center;"><div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:24px;text-align:center;"><span style="font-size:64px;line-height:1;">${s.emoji}</span><span style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(15,23,42,.45);">Photo goes here</span></div></div>`:''}
+      <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(15,23,42,.86) 0%,rgba(15,23,42,.62) 44%,rgba(15,23,42,.08) 78%,rgba(15,23,42,0) 100%);"></div>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:clamp(28px,4vw,52px);max-width:min(660px,72%);">
+        <span style="display:inline-block;width:max-content;font-family:'Outfit',sans-serif;font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:7px 13px;border-radius:10px;background:#fff;color:#0f172a;box-shadow:0 10px 22px -10px rgba(0,0,0,.6);transform:rotate(-2deg);">${h(s.tag)}</span>
+        <h2 style="margin:0;font-family:'Outfit',sans-serif;font-size:clamp(30px,3.6vw,50px);line-height:1.02;letter-spacing:-.035em;font-weight:900;color:#fff;text-wrap:balance;">${h(s.headline)}</h2>
+        <p style="margin:0;font-size:clamp(15px,1.3vw,18px);line-height:1.5;color:#e2e8f0;max-width:52ch;text-wrap:pretty;">${h(s.sub)}</p>
+        <a href="${ctaOk?h(s.url):'javascript:void(0)'}" ${ctaOk?'target="_blank" rel="noopener"':''} class="btn-lift" style="display:flex;align-items:center;gap:9px;width:max-content;margin-top:4px;padding:14px 24px;border-radius:999px;background:#fff;color:#0f172a;font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;letter-spacing:-.01em;box-shadow:0 16px 32px -14px rgba(0,0,0,.7);${ctaOk?'':'opacity:.5;pointer-events:none;'}">${h(s.cta)} <span>→</span></a>
+      </div>
+    </div>`;
+  }).join('');
+
+  if (!cont.querySelector('.slide-nav')) {
+    [['‹','left',-1],['›','right',1]].forEach(([ch,side,dir]) => {
+      const b = document.createElement('button');
+      b.className = 'slide-btn slide-nav';
+      b.setAttribute('aria-label', dir<0 ? 'Previous' : 'Next');
+      b.style.cssText = `position:absolute;${side}:16px;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.22);backdrop-filter:blur(10px);color:#fff;font-size:19px;cursor:pointer;display:grid;place-items:center;z-index:20;`;
+      b.textContent = ch;
+      b.onclick = () => goTo(SS.cur + dir);
+      cont.appendChild(b);
+    });
+  }
+
+  dots.innerHTML = SLIDESHOW.map((_,i) =>
+    `<button class="dot-btn" data-i="${i}" aria-label="Slide ${i+1}" style="width:${i===active?'30px':'9px'};height:9px;border-radius:999px;border:0;padding:0;cursor:pointer;background:${i===active?'#fff':'rgba(255,255,255,.5)'};"></button>`
+  ).join('');
+  dots.querySelectorAll('.dot-btn').forEach(b => b.onclick = () => goTo(+b.dataset.i));
+}
+
+/* ── Filtering ── */
+const filt  = (rows, q) => rows.filter(r => !q || (r.label+' '+r.sub+' '+(r.tag||'')).toLowerCase().includes(q));
+const filtP = (rows, q) => rows.filter(r => !q || Object.values(r).join(' ').toLowerCase().includes(q));
+
+/* ── Section wrapper ── */
+function section(icon,iBg,iBdr,title,sub,subC,bdr,shadow,flex,inner) {
+  return `<section style="flex:${flex};min-width:300px;border-radius:34px;padding:28px 26px 30px;background:rgba(255,255,255,.7);backdrop-filter:blur(16px);border:1.5px solid ${bdr};box-shadow:${shadow};">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px;">
+      <span style="width:52px;height:52px;border-radius:18px;display:grid;place-items:center;font-size:25px;background:${iBg};border:1px solid ${iBdr};flex:none;">${icon}</span>
+      <div style="min-width:0;">
+        <h2 style="margin:0;font-family:'Outfit',sans-serif;font-size:27px;font-weight:900;letter-spacing:-.025em;color:#0f172a;">${title}</h2>
+        <p style="margin:1px 0 0;font-size:12.5px;font-weight:700;color:${subC};letter-spacing:.09em;text-transform:uppercase;">${sub}</p>
+      </div>
+    </div>${inner}</section>`;
+}
+
+/* ── Card builders ── */
+function cardApply(l) {
+  const isPh = ph(l);
+  return `<a href="${phHref(l)}" ${isPh?'':'target="_blank" rel="noopener"'} class="${phClass(l,'card-sky')}"
+    style="flex:1 1 235px;min-width:0;display:flex;flex-direction:column;gap:9px;padding:20px;border-radius:22px;border:2px solid transparent;background:${BG('#38bdf8','#a5f3fc','#e0f2fe')};backdrop-filter:blur(12px);color:#0f172a;">
+    <span style="font-size:30px;line-height:1;">${l.emoji}</span>
+    <span style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;">${h(l.label)}</span>
+    <span style="font-size:13.5px;line-height:1.45;color:#475569;">${h(l.sub)}</span>
+    ${isPh ? phBadge() : (l.tag ? `<span class="sticker" style="display:inline-block;white-space:nowrap;margin-top:3px;width:max-content;font-family:'Outfit',sans-serif;font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border-radius:10px;background:#0ea5e9;color:#fff;box-shadow:0 8px 18px -8px rgba(14,165,233,.9);">${h(l.tag)}</span>` : '')}
+  </a>`;
+}
+
+function rowLink(l, color, bgGrad, tagBg) {
+  const isPh = ph(l);
+  return `<a href="${phHref(l)}" ${isPh?'':'target="_blank" rel="noopener"'} class="${phClass(l,color)}"
+    style="display:flex;align-items:center;gap:15px;padding:17px 19px;border-radius:22px;border:2px solid transparent;background:${bgGrad};backdrop-filter:blur(12px);color:#0f172a;">
+    <span style="font-size:27px;line-height:1;flex:none;">${l.emoji}</span>
+    <span style="display:flex;flex-direction:column;gap:3px;min-width:0;">
+      <span style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;">
+        <span style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.02em;">${h(l.label)}</span>
+        ${isPh ? phBadge() : (l.tag ? sticker(l.tag, tagBg, 'rgba(0,0,0,.35)') : '')}
+      </span>
+      <span style="font-size:13.5px;line-height:1.45;color:#475569;">${h(l.sub)}</span>
+    </span>
+  </a>`;
+}
+
+function cardGuide(l) {
+  const isPh = ph(l);
+  return `<a href="${phHref(l)}" ${isPh?'':'target="_blank" rel="noopener"'} class="${phClass(l,'card-violet')}"
+    style="flex:1 1 235px;min-width:0;display:flex;align-items:center;gap:14px;padding:18px;border-radius:22px;border:2px solid transparent;background:${BG('#a78bfa','#ddd6fe','#f5f3ff')};backdrop-filter:blur(12px);color:#0f172a;">
+    <span style="font-size:27px;line-height:1;flex:none;">${l.emoji}</span>
+    <span style="display:flex;flex-direction:column;gap:3px;min-width:0;">
+      <span style="font-family:'Outfit',sans-serif;font-size:16.5px;font-weight:800;letter-spacing:-.02em;">${h(l.label)}</span>
+      <span style="font-size:13px;line-height:1.4;color:#475569;">${h(l.sub)}</span>
+    </span>
+    ${isPh
+      ? `<span class="placeholder-badge" style="margin-left:auto;flex:none;">Coming Soon</span>`
+      : `<span style="margin-left:auto;flex:none;font-family:'Outfit',sans-serif;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:9px;background:#7c3aed;color:#fff;white-space:nowrap;transform:rotate(-3deg);box-shadow:0 8px 16px -8px rgba(124,58,237,.9);">${h(l.tag)}</span>`}
+  </a>`;
+}
+
+function rowSocial(l) {
+  const isPh = ph(l);
+  return `<a href="${phHref(l)}" ${isPh?'':'target="_blank" rel="noopener"'} class="${phClass(l,'card-pink')}"
+    style="display:flex;align-items:center;gap:15px;padding:17px 19px;border-radius:22px;border:2px solid transparent;background:${BG('#f472b6','#fbcfe8','#fdf2f8')};backdrop-filter:blur(12px);color:#0f172a;">
+    <span style="font-size:27px;line-height:1;flex:none;">${l.emoji}</span>
+    <span style="display:flex;flex-direction:column;gap:3px;min-width:0;">
+      <span style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.02em;">${h(l.label)}</span>
+      <span style="font-size:13.5px;line-height:1.45;color:#475569;">${h(l.sub)}</span>
+    </span>
+    ${isPh
+      ? `<span class="placeholder-badge" style="margin-left:auto;flex:none;">Coming Soon</span>`
+      : (l.tag ? `<span style="margin-left:auto;flex:none;font-family:'Outfit',sans-serif;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:9px;background:#db2777;color:#fff;white-space:nowrap;transform:rotate(-3deg);box-shadow:0 8px 16px -8px rgba(219,39,119,.9);">${h(l.tag)}</span>` : '')}
+  </a>`;
+}
+
+function cardNewsletter(n) {
+  const isPh = ph(n);
+  return `<a href="${phHref(n)}" ${isPh?'':'target="_blank" rel="noopener"'} class="${phClass(n,'card-orange')}"
+    style="flex:1 1 210px;min-width:0;display:flex;flex-direction:column;gap:8px;padding:19px;border-radius:22px;border:2px solid transparent;background:${BG('#fb923c','#fed7aa','#fff7ed')};backdrop-filter:blur(12px);color:#0f172a;">
+    <span style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+      <span style="font-size:26px;line-height:1;">${n.emoji}</span>
+      ${isPh ? phBadge() : `<span style="font-family:'Outfit',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:9px;background:#ea580c;color:#fff;white-space:nowrap;box-shadow:0 8px 16px -8px rgba(234,88,12,.9);">${h(n.tag)}</span>`}
+    </span>
+    <span style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.02em;">${h(n.label)}</span>
+    <span style="font-size:13px;line-height:1.4;color:#475569;">${h(n.sub)}</span>
+  </a>`;
+}
+
+function cardYL(p) {
+  return `<div class="card-lift card-indigo" style="flex:1 1 250px;min-width:0;display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:22px;border:2px solid transparent;background:${BG('#818cf8','#c7d2fe','#eef2ff')};backdrop-filter:blur(12px);">
+    <div style="display:flex;align-items:center;gap:13px;">
+      <span style="width:52px;height:52px;border-radius:17px;display:grid;place-items:center;font-family:'Outfit',sans-serif;font-size:19px;font-weight:900;color:#3730a3;background:linear-gradient(140deg,#e0e7ff,#f5f3ff);border:1px solid rgba(165,180,252,.95);flex:none;">${ini(p.name)}</span>
+      <span style="display:flex;flex-direction:column;gap:2px;min-width:0;">
+        <span style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;color:#0f172a;">${h(p.name)}</span>
+        <span style="font-size:12.5px;font-weight:700;color:#4f46e5;letter-spacing:.05em;text-transform:uppercase;">${h(p.role)}</span>
+      </span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <span style="display:flex;gap:8px;font-size:13.5px;line-height:1.4;color:#475569;"><span style="flex:none;">🧑‍🎓</span><span><strong style="font-weight:700;color:#0f172a;">Assigned to</strong> ${h(p.assigned)}</span></span>
+      <span style="display:flex;gap:8px;font-size:13.5px;line-height:1.4;color:#475569;"><span style="flex:none;">🕐</span><span><strong style="font-weight:700;color:#0f172a;">Free periods</strong> ${h(p.free)}</span></span>
+      <span style="display:flex;gap:8px;font-size:13.5px;line-height:1.4;color:#475569;"><span style="flex:none;">📍</span><span><strong style="font-weight:700;color:#0f172a;">Working</strong> ${h(p.work)}</span></span>
+    </div>
+    <a href="mailto:${h(p.email)}" class="btn-lift-sm btn-indigo" style="display:flex;align-items:center;gap:9px;padding:12px 15px;border-radius:15px;color:#fff;font-family:'Outfit',sans-serif;font-size:13.5px;font-weight:800;box-shadow:0 12px 24px -12px rgba(79,70,229,.9);overflow:hidden;">
+      <span style="flex:none;">✉️</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${h(p.email)}</span>
+    </a>
+  </div>`;
+}
+
+function cardStaff(p) {
+  return `<div class="card-lift card-blue" style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:22px;border:2px solid transparent;background:${BG('#60a5fa','#bfdbfe','#eff6ff')};backdrop-filter:blur(12px);">
+    <div style="display:flex;align-items:center;gap:13px;">
+      <span style="width:52px;height:52px;border-radius:17px;display:grid;place-items:center;font-family:'Outfit',sans-serif;font-size:19px;font-weight:900;color:#1d4ed8;background:linear-gradient(140deg,#dbeafe,#eff6ff);border:1px solid rgba(147,197,253,.95);flex:none;">${ini(p.name)}</span>
+      <span style="display:flex;flex-direction:column;gap:2px;min-width:0;">
+        <span style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;color:#0f172a;">${h(p.name)}</span>
+        <span style="font-size:12.5px;font-weight:700;color:#2563eb;letter-spacing:.05em;text-transform:uppercase;">${h(p.role)}</span>
+      </span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <span style="display:flex;gap:8px;font-size:13.5px;line-height:1.4;color:#475569;"><span style="flex:none;">📍</span><span><strong style="font-weight:700;color:#0f172a;">Where</strong> ${h(p.room)}</span></span>
+      <span style="display:flex;gap:8px;font-size:13.5px;line-height:1.4;color:#475569;"><span style="flex:none;">🕐</span><span><strong style="font-weight:700;color:#0f172a;">Hours</strong> ${h(p.hours)}</span></span>
+      <span style="display:flex;gap:8px;font-size:13.5px;line-height:1.4;color:#475569;"><span style="flex:none;">🧑‍🎓</span><span><strong style="font-weight:700;color:#0f172a;">Ask about</strong> ${h(p.about)}</span></span>
+    </div>
+    <a href="mailto:${h(p.email)}" class="btn-lift-sm btn-blue" style="display:flex;align-items:center;gap:9px;padding:12px 15px;border-radius:15px;color:#fff;font-family:'Outfit',sans-serif;font-size:13.5px;font-weight:800;box-shadow:0 12px 24px -12px rgba(37,99,235,.9);overflow:hidden;">
+      <span style="flex:none;">✉️</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${h(p.email)}</span>
+    </a>
+  </div>`;
+}
+
+/* ── Main render ── */
+function render() {
+  const q     = document.getElementById('search').value.trim().toLowerCase();
+  const apply = filt(HUB_LINKS.applying, q);
+  const path  = filt(HUB_LINKS.pathways, q);
+  const aid   = filt(HUB_LINKS.financialAid, q);
+  const money = filt(HUB_LINKS.scholarships, q);
+  const guide = filt(HUB_LINKS.guides, q);
+  const soc   = filt(HUB_LINKS.social, q);
+  const news  = filt(NEWSLETTERS, q);
+  const yls   = filtP(YOUTH_LEADERS, q);
+  const staff = filtP(SSC_STAFF, q);
+  const total = [apply,path,aid,money,guide,soc,news,yls,staff].reduce((s,a)=>s+a.length,0);
+
+  let html = '';
+
+  if (apply.length) html += section('🎓','linear-gradient(140deg,#e0f2fe,#f0f9ff)','rgba(125,211,252,.8)','Applying to College','CUNY · SUNY · Common App','#0284c7','rgba(125,211,252,.75)','0 34px 70px -46px rgba(2,132,199,.95)','1 1 560px',
+    `<div style="display:flex;flex-wrap:wrap;gap:14px;">${apply.map(cardApply).join('')}</div>`);
+
+  if (path.length)  html += section('🛠️','linear-gradient(140deg,#ccfbf1,#f0fdfa)','rgba(94,234,212,.9)','Trade &amp; Armed Forces','Other post-secondary paths','#0d9488','rgba(94,234,212,.85)','0 34px 70px -46px rgba(13,148,136,.9)','1 1 360px',
+    `<div style="display:flex;flex-direction:column;gap:14px;">${path.map(l=>rowLink(l,'card-teal',BG('#2dd4bf','#99f6e4','#f0fdfa'),'#0d9488')).join('')}</div>`);
+
+  if (aid.length)   html += section('💵','linear-gradient(140deg,#d1fae5,#f0fdf4)','rgba(110,231,183,.85)','Financial Aid','FAFSA first, always','#059669','rgba(110,231,183,.8)','0 34px 70px -46px rgba(5,150,105,.9)','1 1 360px',
+    `<div style="display:flex;flex-direction:column;gap:14px;">${aid.map(l=>rowLink(l,'card-green',BG('#34d399','#a7f3d0','#ecfdf5'),'#059669')).join('')}</div>`);
+
+  if (money.length) html += section('🏅','linear-gradient(140deg,#fef3c7,#fffbeb)','rgba(252,211,77,.9)','Scholarships','Money you never repay','#d97706','rgba(252,211,77,.85)','0 34px 70px -46px rgba(217,119,6,.85)','1 1 360px',
+    `<div style="display:flex;flex-direction:column;gap:14px;">${money.map(l=>rowLink(l,'card-amber',BG('#fbbf24','#fde68a','#fffbeb'),'#f59e0b')).join('')}</div>`);
+
+  if (guide.length) html += section('📎','linear-gradient(140deg,#ede9fe,#f5f3ff)','rgba(196,181,253,.9)','Guides &amp; Downloads','Grab and go','#7c3aed','rgba(196,181,253,.85)','0 34px 70px -46px rgba(124,58,237,.85)','1 1 560px',
+    `<div style="display:flex;flex-wrap:wrap;gap:14px;">${guide.map(cardGuide).join('')}</div>`);
+
+  if (soc.length)   html += section('📣','linear-gradient(140deg,#fce7f3,#fdf2f8)','rgba(249,168,212,.95)','Hear From Us','Announcements live here','#db2777','rgba(249,168,212,.9)','0 34px 70px -46px rgba(219,39,119,.85)','1 1 360px',
+    `<div style="display:flex;flex-direction:column;gap:14px;">${soc.map(rowSocial).join('')}</div>`);
+
+  if (news.length)  html += section('🗓️','linear-gradient(140deg,#ffedd5,#fff7ed)','rgba(253,186,116,.95)',"What We've Been Up To",'Monthly newsletters','#ea580c','rgba(253,186,116,.9)','0 34px 70px -46px rgba(234,88,12,.85)','1 1 100%',
+    `<div style="display:flex;flex-wrap:wrap;gap:14px;">${news.map(cardNewsletter).join('')}</div>`);
+
+  if (yls.length) html += `<section style="flex:1 1 100%;border-radius:34px;padding:28px 26px 30px;background:rgba(255,255,255,.7);backdrop-filter:blur(16px);border:1.5px solid rgba(165,180,252,.9);box-shadow:0 34px 70px -46px rgba(79,70,229,.85);">
+    <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;flex-wrap:wrap;">
+      <span style="width:52px;height:52px;border-radius:18px;display:grid;place-items:center;font-size:25px;background:linear-gradient(140deg,#e0e7ff,#eef2ff);border:1px solid rgba(165,180,252,.95);flex:none;">🫂</span>
+      <div style="min-width:0;flex:1 1 260px;">
+        <h2 style="margin:0;font-family:'Outfit',sans-serif;font-size:27px;font-weight:900;letter-spacing:-.025em;color:#0f172a;">Meet Your Youth Leaders</h2>
+        <p style="margin:1px 0 0;font-size:12.5px;font-weight:700;color:#4f46e5;letter-spacing:.09em;text-transform:uppercase;">${YOUTH_LEADERS.length} youth leaders · here to help</p>
+      </div>
+    </div>
+    <p style="margin:0 0 20px;font-size:14.5px;line-height:1.5;color:#475569;max-width:70ch;">Not sure who yours is? Find your last name in the <strong style="font-weight:700;color:#0f172a;">Assigned to</strong> row below, or stop by the office and we'll match you.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;">${yls.map(cardYL).join('')}</div>
+  </section>`;
+
+  if (staff.length) html += `<section style="flex:1 1 100%;border-radius:34px;padding:28px 26px 30px;background:rgba(255,255,255,.7);backdrop-filter:blur(16px);border:1.5px solid rgba(147,197,253,.95);box-shadow:0 34px 70px -46px rgba(37,99,235,.85);">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap;">
+      <span style="width:52px;height:52px;border-radius:18px;display:grid;place-items:center;font-size:25px;background:linear-gradient(140deg,#dbeafe,#eff6ff);border:1px solid rgba(147,197,253,.95);flex:none;">🏫</span>
+      <div style="min-width:0;">
+        <h2 style="margin:0;font-family:'Outfit',sans-serif;font-size:27px;font-weight:900;letter-spacing:-.025em;color:#0f172a;">Meet Your SSC Staff</h2>
+        <p style="margin:1px 0 0;font-size:12.5px;font-weight:700;color:#2563eb;letter-spacing:.09em;text-transform:uppercase;">${SSC_STAFF.length} adult staff · Room 214</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;">${staff.map(cardStaff).join('')}</div>
+  </section>`;
+
+  if (total === 0) html = `<div style="flex:1 1 100%;padding:60px 30px;border-radius:34px;border:2px dashed rgba(148,163,184,.6);background:rgba(255,255,255,.65);backdrop-filter:blur(12px);text-align:center;">
+    <div style="font-size:38px;">🌤️</div>
+    <p style="margin:14px 0 0;font-family:'Outfit',sans-serif;font-size:23px;font-weight:900;letter-spacing:-.02em;color:#0f172a;">Nothing matched "${h(document.getElementById('search').value)}"</p>
+    <p style="margin:7px 0 0;font-size:15.5px;color:#475569;">Try "FAFSA", "SUNY", or stop by the College Office in Room 214.</p>
+  </div>`;
+
+  document.getElementById('bento').innerHTML = html;
+}
+
+/* ── Boot ── */
+document.addEventListener('DOMContentLoaded', () => {
+  renderSlides();
+  const wrap = document.getElementById('carousel-wrap');
+  wrap.addEventListener('mouseenter', () => { SS.paused = true; });
+  wrap.addEventListener('mouseleave', () => { SS.paused = false; });
+  startTimer();
+  document.getElementById('search').addEventListener('input', render);
+  render();
+});
+</script>
+</body>
+</html>
